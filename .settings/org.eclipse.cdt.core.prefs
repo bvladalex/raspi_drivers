@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.209829782/PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.209829782/PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.209829782/PATH/value=/bin\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/usr/games\:/usr/local/games\:/snap/bin\:/home/bvlad/beaglebone_black/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.209829782/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.209829782/appendContributed=true
