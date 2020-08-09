@@ -1,4 +1,4 @@
-obj-m += helloworld.o
+obj-m += helloworld.o helloworld_char_drv.o
 
 KERNEL_DIR ?= $(HOME)/raspi/linux
 
