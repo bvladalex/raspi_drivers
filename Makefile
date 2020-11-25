@@ -1,5 +1,6 @@
 #obj-m += helloworld.o helloworld_char_drv.o helloworld_class_driver.o hellokeys.o ledRGB_platform.o
-obj-m += ledRGB_platform.o ledRGB_class_platform.o
+#obj-m += ledRGB_platform.o ledRGB_class_platform.o
+obj-m += tc74_temp_sensor.o int_key.o
 
 KERNEL_DIR ?= $(HOME)/raspi/linux
 
