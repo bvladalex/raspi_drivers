@@ -11,9 +11,10 @@
 #include <linux/miscdevice.h>
 #include <linux/timer.h>
 #include <linux/device.h>
+#include <linux/of_device.h>
 
-#define BCM2710_PERI_BASE 	0x3F000000
-#define GPIO_BASE			BCM2710_PERI_BASE + 0x200000
+#define BCM2710_PERI_BASE 	0xfe000000
+#define GPIO_BASE			(BCM2710_PERI_BASE + 0x200000)
 
 struct GpioRegisters
 {
@@ -74,7 +75,7 @@ static struct miscdevice led_miscdevice = {
 		.name = "ledred",
 };
 
-static int __init my_probe(struct platform_device *pdev){
+static int my_probe(struct platform_device *pdev){
 
 	int result, ret_val;
 	struct device *dev = &pdev->dev;
