@@ -115,6 +115,9 @@ int main(void){
 				//snprintf(x_to_print,(sizeof(Vo)+1),"\f%s",Vo);
 				//snprintf(x_to_print,(sizeof(x_to_print)+1),"\f%s",x_to_print);
 				ret=write(my_dev,special_chars,1);
+				if(ret<0){
+					perror("Was not able send clear display command.\n");
+				}
 				ret=write(my_dev,x_to_print,7);
 				if(ret<0){
 					perror("Was not able to transfer all info.\n");
