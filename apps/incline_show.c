@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
+//#include <linux/delay.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <linux/i2c-dev.h>
@@ -30,13 +31,17 @@
 
 double x_val,y_val,z_val;
 int y_incline;
-
 char x_to_print[10], y_to_print[10], z_to_print[10];
+
 char special_chars[]="\f\n";
+char msg[20]="\fIncl in degrees:\n";
+int deg_char=0xDF;
 
 double get_acc_val(char *fd);
 int compute_incline(double axis1, double axis2);
 int ret;
+
+
 
 double get_acc_val(char *fd){
 	int c;
@@ -76,14 +81,18 @@ int compute_incline(double axis1, double axis2){
 
 int main(){
 
-	x_val=get_acc_val(ACCEL_FILE_ACC_X);
+
+	char deg_char_c=(char)deg_char;
+	while (1){
+	//x_val=get_acc_val(ACCEL_FILE_ACC_X);
 	//printf("Retrieved accel value for X axis is: %lf.\n", x_val);
 	y_val=get_acc_val(ACCEL_FILE_ACC_Y);
-	printf("Retrieved accel value for Y axis is: %lf.\n", y_val);
+	//printf("Retrieved accel value for Y axis is: %lf.\n", y_val);
 	z_val=get_acc_val(ACCEL_FILE_ACC_Z);
 	//printf("Retrieved accel value for Z axis is: %lf.\n", z_val);
 	y_incline=compute_incline(y_val,z_val);
 	printf("Incline in degrees on y axis is: %i.\n", y_incline);
+
 
 	int my_dev=open(LCD_FILE, O_WRONLY);
 			if(my_dev<0){
@@ -92,17 +101,23 @@ int main(){
 					//to modify below block to print message and incline angle
 
 					gcvt(y_incline,2,y_to_print);
+					//snprintf((msg+18),3,"%s",y_to_print);
+					snprintf((msg+18),4,"%s%c",y_to_print,deg_char_c);
 					ret=write(my_dev,special_chars,1);
 					if(ret<0){
 						perror("Was not able send clear display command.\n");
 							}
-					ret=write(my_dev,y_to_print,2);
+					//ret=write(my_dev,y_to_print,2);
+					ret=write(my_dev,msg,21);
+					//ret=write(my_dev,&deg_char_c,1);
 					if(ret<0){
 						perror("Was not able to transfer all info.\n");
 							}
 					close(my_dev);
 
 				}
+	sleep(1);
+	}
 
 
 	return 0;
